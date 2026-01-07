@@ -34,7 +34,7 @@ const RecentPostsSection = ({ recentPosts }) => {
         {recentPosts.map((post) => (
           <Card.Root key={post.id} overflow="hidden" shadow="md" borderRadius="lg">
             <Image
-              src={post.image}
+              src={post.featured_image_url}
               alt={post.title}
               h="200px"
               w="full"
@@ -48,7 +48,7 @@ const RecentPostsSection = ({ recentPosts }) => {
                 <HStack gap={2}>
                   {post.tags.slice(0, 2).map((tag) => (
                     <Badge key={tag.id} colorPalette="green" variant="outline" size="sm">
-                      {tag.name}
+                      {tag.title}
                     </Badge>
                   ))}
                 </HStack>
@@ -72,7 +72,7 @@ const RecentPostsSection = ({ recentPosts }) => {
                     <HStack gap={1} textStyle="xs" color="gray.500">
                       <Box as={FaCalendarAlt} />
                       <Text>
-                        {new Date(post.created_at).toLocaleDateString()}
+                        {new Date(post.published_at).toLocaleDateString()}
                       </Text>
                     </HStack>
                   </Box>

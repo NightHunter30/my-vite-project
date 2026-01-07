@@ -16,6 +16,9 @@ import { BiPencil } from "react-icons/bi";
 import useSWR from "swr";
 import { api } from "@/services/api";
 import { Link } from "react-router";
+import { BsEye } from "react-icons/bs";
+import PostDialogBox from "./PostDialogBox";
+import { useState } from "react";
 
 const PostsList = () => {
     // {data, error, isLoading, isvalidating, mutate }
@@ -29,7 +32,14 @@ const PostsList = () => {
         }
     });
 
-    console.log(data)
+    const [open, setOpen] = useState(false)
+    const [viewingPostId, setViewingPostId] = useState(null);
+    
+    const handleViewPost = (postId) => {
+        setViewingPostId(postId)
+        setOpen(true)
+    }
+
 
     return (
         <Box>
@@ -62,12 +72,18 @@ const PostsList = () => {
                             <Table.Cell><Badge colorPalette={post.status == "Draft" ? "blue" : "green"} variant={"subtle"}>{post.status}</Badge></Table.Cell>
                             <Table.Cell textAlign="end">
                                 <IconButton to={`/posts/${post.id}`} as={Link} size="sm" variant={"ghost"} colorPalette="blue" aria-label="Search database"><BiPencil /></IconButton>
+
+                                <IconButton onClick={() => handleViewPost(post.id)}  size="sm" variant={"ghost"} colorPalette={"purple"}>
+                                    <BsEye />
+                                </IconButton>
                             </Table.Cell>
                         </Table.Row>
                     )}
                         
                     </Table.Body>
                 </Table.Root> }
+
+                <PostDialogBox open={open} onOpenChange={(e) => setOpen(e.open)} postId={viewingPostId}  />
             </Container>
             <Footer />
         </Box>

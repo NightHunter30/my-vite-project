@@ -30,7 +30,7 @@ const FeaturedPostSection = ({ featuredPost }) => {
           <Flex direction={{ base: "column", lg: "row" }}>
             <Box flex="1">
               <Image
-                src={featuredPost.image}
+                src={featuredPost.featured_image_url}
                 alt={featuredPost.title}
                 w="full"
                 h={{ base: "250px", lg: "400px" }}
@@ -43,26 +43,22 @@ const FeaturedPostSection = ({ featuredPost }) => {
                 {featuredPost.title}
               </Heading>
               <Text color="gray.600" lineClamp={3}>
-                {featuredPost.content}
+                {featuredPost.excerpt}
               </Text>
               <HStack gap={2}>
                 {featuredPost.tags.map((tag) => (
                   <Badge key={tag.id} colorPalette="green" variant="outline">
-                    {tag.name}
+                    {tag.title}
                   </Badge>
                 ))}
               </HStack>
               <HStack gap={4} w="full">
                 <HStack gap={2}>
-                  {/* <Avatar size="sm" name={featuredPost.author.email} /> */}
                   <Box>
-                    {/* <Text textStyle="sm" fontWeight="medium">
-                      {featuredPost.author.email}
-                    </Text> */}
                     <HStack gap={1} textStyle="xs" color="gray.500">
                       <Box as={FaCalendarAlt} />
                       <Text>
-                        {new Date(featuredPost.created_at).toLocaleDateString()}
+                        {new Date(featuredPost.published_at).toLocaleDateString()}
                       </Text>
                     </HStack>
                   </Box>
@@ -75,7 +71,7 @@ const FeaturedPostSection = ({ featuredPost }) => {
               </HStack>
               <Button
                 as={Link}
-                to={`/posts/${featuredPost.id}`}
+                to={`/posts/view/${featuredPost.id}`}
                 colorPalette="blue"
               >
                 Read Full Article
