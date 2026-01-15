@@ -7,7 +7,7 @@ import {
     Heading,
     Text
 } from "@chakra-ui/react";
-import { useNavigate } from "react-router";
+import { useNavigate, Navigate } from "react-router";
 import Navbar from "./Navbar";
 import PostForm from "./PostForm";
 

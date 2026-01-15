@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navigate, Link as RouterLink, useNavigate } from "react-router";
+import { Navigate, Link as RouterLink, useLocation, useNavigate } from "react-router";
 import useSWRMutation from "swr/mutation";
 import {
     Box,
@@ -27,13 +27,20 @@ export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const location = useLocation();
     const { isMutating, trigger, error } = useSWRMutation(
         "auth-login",
         (key, { arg }) => authAPI.login(arg),
         {
-            onSuccess: (response) => {
-                mutate("auth/me")
-                navigate("/dashboard")
+            onSuccess: async (response) => {
+                await mutate("auth/me")
+                let pathname = null;
+                if(location.state) {
+                    pathname = location.state.from
+                } else {
+                    pathname = "/dashboard"
+                }
+                navigate(pathname)
             },
         }
     );

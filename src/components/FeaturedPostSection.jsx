@@ -16,6 +16,9 @@ import { Link } from 'react-router'
 import { FaStar, FaCalendarAlt, FaHeart, FaArrowRight } from 'react-icons/fa'
 
 const FeaturedPostSection = ({ featuredPost }) => {
+  if(!featuredPost) {
+    return;
+  }
   return (
     <Container maxW="container.xl" py={12}>
       <VStack gap={8} align="stretch">

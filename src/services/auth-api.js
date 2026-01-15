@@ -1,7 +1,7 @@
 // Authentication API functions
 import axios from 'axios'
 
-const API_BASE_URL ='http://localhost:5000'
+const API_BASE_URL ='https://tutorial-blog-app-backend.onrender.com'
 
 const authClient = axios.create({
   baseURL: API_BASE_URL,
@@ -48,6 +48,7 @@ export const authAPI = {
 
   async checkAuth() {
     try {
+      // await new Promise(res => setTimeout(res, 4000));
       const { data } = await authClient.get('/auth/me')
       return data
     } catch {

@@ -19,12 +19,8 @@ import {
 import { useAuth } from '@/contexts/auth-context'
 
 export default function Register() {
-  const { register, isAuthenticated } = useAuth()
+  const { isAuthenticated } = useAuth()
   const navigate = useNavigate()
-  const { trigger: triggerRegister, isMutating: registerLoading } = useSWRMutation(
-    'auth/register',
-    (_key, { arg }) => register(arg)
-  )
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -32,6 +28,13 @@ export default function Register() {
     confirmPassword: ''
   })
   const [error, setError] = useState('')
+
+  const { trigger: triggerRegister, isMutating: registerLoading } = useSWRMutation(
+    'auth/register',
+    (_key, { arg }) => () => {
+      console.log(formData)
+    }
+  )
 
   // Redirect if already authenticated
   if (isAuthenticated) {
