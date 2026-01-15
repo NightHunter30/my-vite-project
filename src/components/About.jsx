@@ -59,7 +59,7 @@ function About() {
         <Container maxW="4xl">
           <VStack gap={6} textAlign="center">
             <Heading as="h1" size="2xl" fontWeight="bold">
-              About BlogSpace
+              About BlogSpace - Updated via pipeline
             </Heading>
             <Text fontSize="lg" color={textColor} maxW="2xl">
               Welcome to BlogSpace, your platform for sharing ideas, knowledge, and stories with a global community of writers and readers.
